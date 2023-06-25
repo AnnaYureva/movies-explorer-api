@@ -12,6 +12,10 @@ const routes = require('./routes');
 // Слушаем 300 порт
 const { PORT = 3000 } = process.env;
 
+// Соединение с БД
+
+mongoose.connect('mongodb://127.0.0.1:27017/moviesdb');
+
 // создаем переменную с параметрами лимитера
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 минута
@@ -50,10 +54,6 @@ app.use(errorLogger);
 
 app.use(errors()); // обработка ошибок
 app.use(error);
-
-// Соединение с БД
-
-mongoose.connect('mongodb://127.0.0.1:27017/moviesdb');
 
 // Запускаем сервер
 
